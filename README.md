@@ -25,10 +25,10 @@
   - Run safe scripts (from `command/`)
 - Logs all commands, login attempts, and fake network usage
 
----
 
 ## 📁 Project Layout
 
+```
 ├── main.go # Entrypoint 
 ├── users.go # Authentication logic 
 ├── commands.go # Command dispatch and execution 
@@ -41,7 +41,7 @@
 ├── help/ # Help messages per command 
 ├── work/ # Optional user work directory
 
----
+```
 
 ## 🚀 Quick Start
 
