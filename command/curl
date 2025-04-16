@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Extract URL (first non-flag argument)
+for arg in "$@"; do
+  if [[ "$arg" =~ ^https?:// ]]; then
+    url="$arg"
+    break
+  fi
+done
+
+if [[ -n "$url" ]]; then
+  echo "[fake curl] Would fetch: $url" >&2
+  logger -t fake-curl "Attempted download from: $url"
+else
+  echo "curl: no URL specified!" >&2
+fi
+
+# Simulated output
+echo "<html><body><h1>404 Not Found</h1></body></html>"
+

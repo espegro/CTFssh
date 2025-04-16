@@ -1,0 +1,12 @@
+#!/bin/bash
+
+now=$(date "+%a %b %e %H:%M")
+yesterday=$(date -d "1 day ago" "+%a %b %e %H:%M")
+two_days=$(date -d "2 days ago" "+%a %b %e %H:%M")
+
+echo "root     pts/0        192.168.1.10     $yesterday   still logged in"
+echo "user1    pts/1        localhost        $now - $now  (00:05)"
+echo "admin    pts/2        10.0.0.3         $two_days - $two_days  (00:12)"
+echo
+echo "wtmp begins $(date -d '7 days ago')"
+

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+file="$1"
+
+case "$file" in
+  /proc/cpuinfo)
+    echo "processor   : 0"
+    echo "vendor_id   : GenuineIntel"
+    echo "cpu family  : 6"
+    echo "model       : 158"
+    echo "model name  : Intel(R) Core(TM) i7-8665U CPU @ 1.90GHz"
+    echo "cpu MHz     : 2112.004"
+    echo "cache size  : 8192 KB"
+    echo "flags       : fpu vme de pse tsc msr pae mce cx8 apic sep ..."
+    ;;
+  /proc/meminfo)
+    echo "MemTotal:       16338152 kB"
+    echo "MemFree:         2313840 kB"
+    echo "MemAvailable:    7428404 kB"
+    echo "Buffers:          341728 kB"
+    echo "Cached:          4954608 kB"
+    ;;
+  /proc/version)
+    echo "Linux version 5.15.0-105-generic (buildd@lcy02-amd64) #115-Ubuntu SMP"
+    ;;
+  /proc/mounts)
+    echo "/dev/sda1 / ext4 rw,relatime,data=ordered 0 0"
+    echo "tmpfs /run tmpfs rw,nosuid,nodev,mode=755 0 0"
+    ;;
+  /etc/passwd)
+    echo "root:x:0:0:root:/root:/bin/bash"
+    echo "user:x:1000:1000:User,,,:/home/user:/bin/bash"
+    ;;
+  /etc/hosts)
+    echo "127.0.0.1       localhost"
+    echo "::1             ip6-localhost ip6-loopback"
+    echo "192.168.1.100   custhost"
+    ;;
+  *)
+    echo "cat: $file: No such file or directory"
+    ;;
+esac
+

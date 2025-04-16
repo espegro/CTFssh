@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+  echo "ping: usage error: Destination address required"
+  exit 1
+fi
+
+host="$1"
+ip="192.168.$((RANDOM % 255)).$((RANDOM % 255))"
+count=4
+bytes=64
+ttl=64
+interval=1
+
+# Optional: parse -c N
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -c)
+      count="$2"
+      shift 2
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
+
+logger -t honeypot-ping "Ping attempt: $host from $SSH_CLIENT"
+
+echo "PING $host ($ip) $bytes bytes of data."
+
+for i in $(seq 1 $count); do
+  ms=$((RANDOM % 50 + 1))
+  echo "$bytes bytes from $ip: icmp_seq=$i ttl=$ttl time=${ms}.0 ms"
+  sleep $interval
+done
+
+echo
+echo "--- $host ping statistics ---"
+echo "$count packets transmitted, $count received, 0% packet loss, time $((count * interval * 1000))ms"
+echo "rtt min/avg/max/mdev = 1.0/25.0/50.0/10.0 ms"
+

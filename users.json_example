@@ -1,0 +1,23 @@
+[
+  {
+    "username": "admin",
+    "hash": "$6$JVeZr7WZHkZKAaQD$fwqR5QRb7k7PqJcfzSjuYkLt5Tke2cEd.i7jTNC6lNUlKgI9eo04zue8iVoNnapxz3QPn8iFqLl/VhbmfQlqF0",
+    "admin": true,
+    "restrict": "",
+    "allowed": ["help", "info", "exit","blocked"],
+    "prompt": "# ",
+    "banner": "Welcome to your admin shell."
+  },
+  {
+    "username": "user",
+    "hash": "$6$JVeZr7WZHkZKAaQD$fwqR5QRb7k7PqJcfzSjuYkLt5Tke2cEd.i7jTNC6lNUlKgI9eo04zue8iVoNnapxz3QPn8iFqLl/VhbmfQlqF0",
+    "admin": false,
+    "restrict": "/home/user1",
+    "allowed": ["w","last","ping","wget","curl","cat","hello","help", "info", "exit","df","hei","hostname","id","ls","ps","pwd","uname","uptime","whoami"],
+    "prompt": "# ",
+    "banner": "Welcome user.",
+    "pubkeys": [
+      "ssh-ed25519 xxxxxxxxxxxxxxx"
+      ]
+  }
+]

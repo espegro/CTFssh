@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Extract the first argument that looks like a URL
+for arg in "$@"; do
+  if [[ "$arg" =~ ^https?:// ]]; then
+    url="$arg"
+    break
+  fi
+done
+
+if [[ -z "$url" ]]; then
+  echo "wget: missing URL" >&2
+  exit 1
+fi
+
+# Extract domain for simulated DNS resolution
+domain=$(echo "$url" | awk -F/ '{print $3}')
+timestamp=$(date "+%Y-%m-%d %H:%M:%S")
+
+# Simulated IP (do not resolve for real)
+fake_ip="93.184.216.34"  # example.com
+
+# Log the download attempt
+echo "[wget] Simulated fetch: $url" >&2
+logger -t honeypot-wget "Download attempt: $url from $SSH_CLIENT"
+
+# Print realistic output
+echo "--$timestamp--  $url"
+echo "Resolving $domain ($domain)... $fake_ip"
+echo "Connecting to $domain ($fake_ip)|:$([[ "$url" =~ https ]] && echo 443 || echo 80)... connected."
+echo "HTTP request sent, awaiting response... 200 OK"
+echo "Length: 2747 (2.7K) [application/octet-stream]"
+echo "Saving to: ‘index.html’"
+echo
+echo "index.html         100%[===================>]   2.68K  --.-KB/s    in 0s"
+echo
+echo "$timestamp (UTC) - ‘index.html’ saved [2747/2747]"
+

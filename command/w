@@ -1,0 +1,11 @@
+#!/bin/bash
+
+now=$(date "+%H:%M:%S")
+uptime="12 days,  4:33"
+users="2"
+loadavg="0.00, 0.01, 0.05"
+
+echo " $now up $uptime,  $users users,  load average: $loadavg"
+echo "USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT"
+echo "root     pts/0    192.168.1.10     08:11    2:30m  0.02s  0.02s -bash"
+echo "user     pts/1    localhost        08:45    1:03m  0.01s  0.00s w"
